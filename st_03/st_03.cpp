@@ -24,32 +24,44 @@ using namespace std;
 //	sum = a*b;
 //	return sum;
 //}
-class CBox
+//class CBox
+//{
+//public:
+//	double m_Length;
+//	double m_Width;
+//	double m_Height;
+//	CBox(){
+//		cout <<"Constructor CBox() called." << endl;
+//	};
+//	explicit CBox(double lv):m_Length(lv),m_Width(lv),m_Height(lv)
+//	{
+//		cout  << "Constructor CBox(double lv) called." << endl;
+//	}
+//
+//	CBox& operator=(const double bb)
+//	{
+//		cout  << "CBox& operator=(const double bb) called." << endl;
+//		m_Length = m_Width = m_Height = bb;
+//		return *this;
+//	}
+//
+//	double Volume()
+//	{
+//		return m_Length*m_Width*m_Height;
+//	}
+//};
+
+class Area
 {
 public:
-	double m_Length;
-	double m_Width;
-	double m_Height;
-	CBox(){
-		cout <<"Constructor CBox() called." << endl;
-	};
-	explicit CBox(double lv):m_Length(lv),m_Width(lv),m_Height(lv)
+	int operator()(int length,int width)
 	{
-		cout  << "Constructor CBox(double lv) called." << endl;
-	}
-
-	CBox& operator=(const double bb)
-	{
-		cout  << "CBox& operator=(const double bb) called." << endl;
-		m_Length = m_Width = m_Height = bb;
-		return *this;
-	}
-
-	double Volume()
-	{
-		return m_Length*m_Width*m_Height;
+		return length*width;
 	}
 };
+
+void printArea(int length,int width,Area& area);
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	/*
@@ -196,11 +208,12 @@ cout << "Result is " << product(z,y,n) << endl;
 
 cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
 
-	CBox box1(8);
-	cout << "Volume:" << box1.Volume() << endl;
-	box1 = 99.0;
+	//CBox box1(8);
+	//cout << "Volume:" << box1.Volume() << endl;
+	//box1 = 99.0;
 
-	cout << "Volume:" << box1.Volume() << endl;
+	//cout << "Volume:" << box1.Volume() << endl;
+	printArea(20,35,Area());
 	return 0;
 
 }
@@ -270,3 +283,7 @@ cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
 //	return sum;
 //}
 
+void printArea(int length,int width,Area& area)
+{
+	cout << "Area is " << area(length,width) << endl;
+}
