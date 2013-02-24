@@ -51,17 +51,70 @@ using namespace std;
 //	}
 //};
 
-class Area
+//class Area
+//{
+//public:
+//	int operator()(int length,int width)
+//	{
+//		return length*width;
+//	}
+//};
+
+//void printArea(int length,int width,Area& area);
+class CMessage
 {
+private:
+	char *pmessage;
 public:
-	int operator()(int length,int width)
+	void ShowIt()
 	{
-		return length*width;
+		cout << endl << pmessage;
+	}
+
+	CMessage operator+(const CMessage& aMess) const
+	{
+		cout << "Add operator function called." << endl;
+		size_t len = strlen(pmessage) + strlen(aMess.pmessage) + 1;
+		CMessage message;
+		message.pmessage = new char[len];
+		strcpy_s(message.pmessage,len,pmessage);
+		strcat_s(message.pmessage,len,aMess.pmessage);
+		return message;
+	}
+
+	CMessage& operator=(const CMessage& aMess)
+	{
+		cout << "Assignment operator function call." << endl;
+		if(this == &aMess)
+			return *this;
+
+		delete[] pmessage;
+		pmessage = new char[strlen(aMess.pmessage)+1];
+		strcpy_s(pmessage,strlen(aMess.pmessage)+1,aMess.pmessage);
+		return *this;
+	}
+
+	CMessage(const char* text="Default message")
+	{
+		cout << "Constructor called." << endl;
+		pmessage = new char[strlen(text)+1];
+		strcpy_s(pmessage,strlen(text)+1,text);
+	}
+
+	CMessage(const CMessage& aMess)
+	{
+		cout << "Copy constructor called." << endl;
+		size_t len = strlen(aMess.pmessage)+1;
+		pmessage = new char[len];
+		strcpy_s(pmessage,len,aMess.pmessage);
+	}
+
+	~CMessage()
+	{
+		cout << "Destructor called." << endl;
+		delete [] pmessage;
 	}
 };
-
-void printArea(int length,int width,Area& area);
-
 int _tmain(int argc, _TCHAR* argv[])
 {
 	/*
@@ -213,7 +266,23 @@ cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
 	//box1 = 99.0;
 
 	//cout << "Volume:" << box1.Volume() << endl;
-	printArea(20,35,Area());
+	//printArea(20,35,Area());
+
+	CMessage motto1("The devil takes care of his own.");
+	CMessage motto2("If you sup with the devil use a long spoon.\n");
+	CMessage motto3;
+
+	cout << "Executing: motto3 = motto1 + motto2 " << endl;
+	motto3 = motto1 + motto2;
+	cout << "Done!!" << endl << endl;
+
+	cout << "Executing: motto3 = motto3 + motto1 + motto2 " << endl;
+	motto3 = motto3 + motto1 + motto2;
+	cout << "Done!!" << endl << endl;
+
+	cout << "motto3 contains - ";
+	motto3.ShowIt();
+	cout << endl;
 	return 0;
 
 }
@@ -283,7 +352,7 @@ cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
 //	return sum;
 //}
 
-void printArea(int length,int width,Area& area)
-{
-	cout << "Area is " << area(length,width) << endl;
-}
+//void printArea(int length,int width,Area& area)
+//{
+//	cout << "Area is " << area(length,width) << endl;
+//}
