@@ -4,13 +4,52 @@
 #include "stdafx.h"
 #include "MyConst.h"
 #include <cstdarg>
-
+#include <new>
+#include <typeinfo>
+using namespace std;
 //void SetArray(double const aData[],int iCount);
 //int incr10(const int& num);
 //int incr20(int && num);
 //int sum(int nCount,...);
 //double *treble(double data);
-double *treble(double data);
+//double *treble(double data);
+//template<typename T>T max(T a[],int len);
+//
+//template<typename T1,typename T2>
+//auto product(T1 v1[],T2 v2[],size_t count)->decltype(v1[0]*v2[0]);
+//
+//auto OutX(int a,long b)->decltype(a*b)
+//{
+//	decltype(a*b) sum(0);
+//	sum = a*b;
+//	return sum;
+//}
+class CBox
+{
+public:
+	double m_Length;
+	double m_Width;
+	double m_Height;
+	CBox(){
+		cout <<"Constructor CBox() called." << endl;
+	};
+	explicit CBox(double lv):m_Length(lv),m_Width(lv),m_Height(lv)
+	{
+		cout  << "Constructor CBox(double lv) called." << endl;
+	}
+
+	CBox& operator=(const double bb)
+	{
+		cout  << "CBox& operator=(const double bb) called." << endl;
+		m_Length = m_Width = m_Height = bb;
+		return *this;
+	}
+
+	double Volume()
+	{
+		return m_Length*m_Width*m_Height;
+	}
+};
 int _tmain(int argc, _TCHAR* argv[])
 {
 	/*
@@ -109,27 +148,69 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//std::cout << std::endl << "Result = " << *ptr << std::endl;
 
-	double num(5.0);
-	double *ptr(nullptr);
-	ptr = treble(num);
+	//double num(5.0);
+	//double *ptr(nullptr);
+	//ptr = treble(num);
 
-	std::cout << std::endl << "Three times num = " << 3.0 * num << std::endl;
+	//std::cout << std::endl << "Three times num = " << 3.0 * num << std::endl;
 
-	std::cout << std::endl << " Result = " << *ptr << std:: endl;
+	//std::cout << std::endl << " Result = " << *ptr << std:: endl;
 
-	delete ptr;
-	ptr = nullptr;
+	//delete ptr;
+	//ptr = nullptr;
 
+	//char* pdata(nullptr);
+	//size_t count = ~static_cast<size_t>(0)/200;
+	//try
+	//{
+	//	pdata = new char[count];
+	//	std::cout << "Memory allocated." << std::endl;
+	//}
+	//catch (std::bad_alloc &ex)
+	//{
+	//	std::cout << "Memory allocation failed." << count/1024/1024 << std::endl 
+	//		<< "The information from the exception object is:"
+	//		<< ex.what() << std::endl;
+	//}
+	//delete[] pdata;
+
+	/*int aa[] = { 3,8,7,22,4,11,228};
+	int m = max(aa,sizeof(aa)/sizeof(aa[0]));
+	std::cout << m << std::endl;
+	double bb[] = {3.0,22.5,8.1,99.3};
+	double mm = max(bb,sizeof(bb)/sizeof(bb[0]));
+	std::cout << mm << std::endl;*/
+	
+/*double x[] = {100.5,99.5,88.7,77.8};
+short y[] = {3,4,5,6};
+long z[] = {11L,12L,13L,14L};
+size_t n = 4;
+
+
+
+cout << "Result type is " << typeid(product(x,y,n)).name() << endl;
+cout << "Result is " << product(x,y,n) << endl;
+
+cout << "Result type is " << typeid(product(z,y,n)).name() << endl;
+cout << "Result is " << product(z,y,n) << endl;
+
+cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
+
+	CBox box1(8);
+	cout << "Volume:" << box1.Volume() << endl;
+	box1 = 99.0;
+
+	cout << "Volume:" << box1.Volume() << endl;
 	return 0;
 
 }
 
-double * treble( double data )
-{
-	double *result(new double(0.0));
-	*result = 3.0 * data;
-	return result;
-}
+//double * treble( double data )
+//{
+//	double *result(new double(0.0));
+//	*result = 3.0 * data;
+//	return result;
+//}
 
 //int sum( int nCount,... )
 //{
@@ -169,5 +250,23 @@ double * treble( double data )
 //	{
 //		const_cast<double>(aData[i]) = static_cast<double>(i);
 //	}
+//}
+//template<typename T>T max(T x[],int len)
+//{
+//	T maxnum(x[0]);
+//	for(int i=1;i<len;i++)
+//	{
+//		if(maxnum < x[i])
+//			maxnum = x[i];
+//	}
+//	return maxnum;
+//}
+//template<typename T1,typename T2>
+//auto product(T1 v1[],T2 v2[],size_t count)->decltype(v1[0]*v2[0])
+//{
+//	decltype(v1[0]*v2[0]) sum(0);
+//	for(size_t i=0;i<count;i++)
+//		sum += v1[i]*v2[i];
+//	return sum;
 //}
 
