@@ -140,55 +140,47 @@ public:
 class CMessage
 {
 private:
-	char *pmessage;
+	CText text;
 public:
 	void ShowIt()
 	{
-		cout << endl << pmessage;
+		text.ShowIt();
 	}
 
 	CMessage operator+(const CMessage& aMess) const
 	{
-		cout << "Add operator function called." << endl;
-		size_t len = strlen(pmessage) + strlen(aMess.pmessage) + 1;
+		cout << "CMessage add operator function called." << endl;
 		CMessage message;
-		message.pmessage = new char[len];
-		strcpy_s(message.pmessage,len,pmessage);
-		strcat_s(message.pmessage,len,aMess.pmessage);
+		message.text = text + aMess.text;
 		return message;
 	}
 
 	CMessage& operator=(const CMessage& aMess)
 	{
-		cout << "Assignment operator function call." << endl;
+		cout << "CMessage assignment operator function call." << endl;
 		if(this == &aMess)
 			return *this;
 
-		delete[] pmessage;
-		pmessage = new char[strlen(aMess.pmessage)+1];
-		strcpy_s(pmessage,strlen(aMess.pmessage)+1,aMess.pmessage);
+		text = aMess.text;
+		return *this;
+	}
+	CMessage& operator=(const CMessage&& aMess)
+	{
+		cout << "CMessage move assignment operator function called." << endl;
+		text = aMess.text;
 		return *this;
 	}
 
-	CMessage(const char* text="Default message")
+	CMessage(const char* str="Default message")
 	{
-		cout << "Constructor called." << endl;
-		pmessage = new char[strlen(text)+1];
-		strcpy_s(pmessage,strlen(text)+1,text);
+		cout << "CMessage constructor called." << endl;
+		text = CText(str);
 	}
 
 	CMessage(const CMessage& aMess)
 	{
-		cout << "Copy constructor called." << endl;
-		size_t len = strlen(aMess.pmessage)+1;
-		pmessage = new char[len];
-		strcpy_s(pmessage,len,aMess.pmessage);
-	}
-
-	~CMessage()
-	{
-		cout << "Destructor called." << endl;
-		delete [] pmessage;
+		cout << "CMessage copy constructor called." << endl;
+		text = aMess.text;
 	}
 };
 int _tmain(int argc, _TCHAR* argv[])
