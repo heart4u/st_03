@@ -77,7 +77,7 @@ public:
 		cout << "CText constructor called." << endl;
 		size_t len(strlen(pStr)+1);
 		pText = new char[len];
-		strcpy_s(pText,lend,pStr);
+		strcpy_s(pText,len,pStr);
 	}
 
 	CText(const CText& txt)
@@ -338,18 +338,19 @@ cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
 
 	CMessage motto1("The devil takes care of his own.");
 	CMessage motto2("If you sup with the devil use a long spoon.\n");
-	CMessage motto3;
+	
 
-	cout << "Executing: motto3 = motto1 + motto2 " << endl;
-	motto3 = motto1 + motto2;
-	cout << "Done!!" << endl << endl;
-
-	cout << "Executing: motto3 = motto3 + motto1 + motto2 " << endl;
-	motto3 = motto3 + motto1 + motto2;
-	cout << "Done!!" << endl << endl;
-
-	cout << "motto3 contains - ";
+	cout << "Executing:CMessage motto3(motto1+motto2) " << endl;
+	CMessage motto3(motto1+motto2);
+	cout << "Done!! " << endl << endl << "motto3 contains - ";
 	motto3.ShowIt();
+
+	CMessage motto4;
+	cout << endl <<"Executing: motto4 = motto3 + motto2 " << endl;
+	motto4 = motto3  + motto2;
+	cout << "Done!! " << endl << endl << "motto4 contains - ";
+
+	motto4.ShowIt();
 	cout << endl;
 	return 0;
 
