@@ -90,7 +90,7 @@ public:
 
 	CText(CText&& txt)
 	{
-		cout <<"Ctext move constructor called." << endl;
+		cout <<"CText move constructor called." << endl;
 		pText = txt.pText;
 		txt.pText = nullptr;
 	}
