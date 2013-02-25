@@ -6,6 +6,7 @@
 #include <cstdarg>
 #include <new>
 #include <typeinfo>
+#include <utility>
 using namespace std;
 //void SetArray(double const aData[],int iCount);
 //int incr10(const int& num);
@@ -164,10 +165,10 @@ public:
 		text = aMess.text;
 		return *this;
 	}
-	CMessage& operator=(const CMessage&& aMess)
+	CMessage& operator=(CMessage&& aMess)
 	{
 		cout << "CMessage move assignment operator function called." << endl;
-		text = aMess.text;
+		text = move(aMess.text);
 		return *this;
 	}
 
@@ -181,6 +182,12 @@ public:
 	{
 		cout << "CMessage copy constructor called." << endl;
 		text = aMess.text;
+	}
+
+	CMessage(CMessage&& aMess)
+	{
+		cout << "CMessage move constructor called." << endl;
+		text = move(aMess.text);
 	}
 };
 int _tmain(int argc, _TCHAR* argv[])
