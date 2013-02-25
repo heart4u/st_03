@@ -61,6 +61,82 @@ using namespace std;
 //};
 
 //void printArea(int length,int width,Area& area);
+
+class CText
+{
+private:
+	char* pText;
+public:
+	void ShowIt()const
+	{
+		cout << pText << endl;
+	}
+
+	CText(const char* pStr = "No text")
+	{
+		cout << "CText constructor called." << endl;
+		size_t len(strlen(pStr)+1);
+		pText = new char[len];
+		strcpy_s(pText,lend,pStr);
+	}
+
+	CText(const CText& txt)
+	{
+		cout << "CText copy constructor called." << endl;
+		size_t len(strlen(txt.pText)+1);
+		pText = new char[len];
+		strcpy_s(pText,len,txt.pText);
+	}
+
+	CText(CText&& txt)
+	{
+		cout <<"Ctext move constructor called." << endl;
+		pText = txt.pText;
+		txt.pText = nullptr;
+	}
+
+	~CText()
+	{
+		cout << "CText destructor called." << endl;
+		delete [] pText;
+	}
+
+	CText& operator=(const CText &txt)
+	{
+		cout << "CText assignment operator function called." << endl;
+		if(this == & txt)
+		{
+			return *this;
+		}
+
+		delete [] pText;
+		size_t len(strlen(txt.pText)+1);
+		pText = new char[len];
+
+		strcpy_s(pText,len,txt.pText);
+		return *this;
+	}
+
+	CText& operator=(CText&& txt)
+	{
+		cout << "CText move assignment operator function called." << endl;
+		delete[] pText;
+		pText = txt.pText;
+		txt.pText = nullptr;
+		return *this;
+	}
+
+	CText operator+(const CText& txt)const
+	{
+		cout << "CText add operator function called." << endl;
+		size_t len(strlen(pText) + strlen(txt.pText) +1);
+		CText aText;
+		aText.pText = new char[len];
+		strcpy_s(aText.pText,len,pText);
+		strcat_s(aText.pText,len,txt.pText);
+		return aText;
+	}
+};
 class CMessage
 {
 private:
