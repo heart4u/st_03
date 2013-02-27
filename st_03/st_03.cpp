@@ -61,6 +61,16 @@ using namespace std;
 //	}
 //};
 
+template<class T>
+class Area
+{
+public:
+	int operator()(T length,T width)
+	{
+		return length*width;
+	}
+};
+
 //void printArea(int length,int width,Area& area);
 
 class CText
@@ -359,7 +369,9 @@ cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
 
 	motto4.ShowIt();
 	cout << endl;
-	return 0;
+	Area<int> aa;
+	cout << aa(20,30) << endl;
+	return 0; 
 
 }
 
