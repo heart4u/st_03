@@ -213,13 +213,13 @@ public:
 		return m_h*m_l*m_w;
 	}
 	int o;
-private:
+protected:
 	int m_l;
 	int m_w;
 	int m_h;
 };
 
-class CCandyBox:CBox
+class CCandyBox:protected CBox
 {
 public:
 	CCandyBox(int l=0,int w=0,int h=0,const char* c="Candy"):CBox(l,w,h)
@@ -230,6 +230,13 @@ public:
 	void Show(void)
 	{
 		cout <<m_contents <<  Volume() << endl;
+	}
+	void ShowData(void)
+	{
+		cout << "Contents:" << m_contents << endl;
+		cout << "Width:" << m_w << endl;
+		cout << "Height:" << m_h << endl;
+		cout << "Length:" << m_l << endl;
 	}
 	~CCandyBox()
 	{
@@ -409,9 +416,9 @@ cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
 	cout << endl;
 	Area<int> aa;
 	cout << aa(20,30) << endl;*/
-	CCandyBox box;
-	cout << box.Volume() << endl;
-	//box.Show();
+	CCandyBox box(1,2,3,"Ok");
+	box.ShowData();
+	box.Show();
 	return 0; 
 
 }
