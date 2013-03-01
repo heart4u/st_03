@@ -61,144 +61,182 @@ using namespace std;
 //	}
 //};
 
-template<class T>
-class Area
-{
-public:
-	int operator()(T length,T width)
-	{
-		return length*width;
-	}
-};
+//template<class T>
+//class Area
+//{
+//public:
+//	int operator()(T length,T width)
+//	{
+//		return length*width;
+//	}
+//};
 
 //void printArea(int length,int width,Area& area);
 
-class CText
+//class CText
+//{
+//private:
+//	char* pText;
+//public:
+//	void ShowIt()const
+//	{
+//		cout << pText << endl;
+//	}
+//
+//	CText(const char* pStr = "No text")
+//	{
+//		cout << "CText constructor called." << endl;
+//		size_t len(strlen(pStr)+1);
+//		pText = new char[len];
+//		strcpy_s(pText,len,pStr);
+//	}
+//
+//	CText(const CText& txt)
+//	{
+//		cout << "CText copy constructor called." << endl;
+//		size_t len(strlen(txt.pText)+1);
+//		pText = new char[len];
+//		strcpy_s(pText,len,txt.pText);
+//	}
+//
+//	CText(CText&& txt)
+//	{
+//		cout <<"CText move constructor called." << endl;
+//		pText = txt.pText;
+//		txt.pText = nullptr;
+//	}
+//
+//	~CText()
+//	{
+//		cout << "CText destructor called." << endl;
+//		delete [] pText;
+//	}
+//
+//	CText& operator=(const CText &txt)
+//	{
+//		cout << "CText assignment operator function called." << endl;
+//		if(this == & txt)
+//		{
+//			return *this;
+//		}
+//
+//		delete [] pText;
+//		size_t len(strlen(txt.pText)+1);
+//		pText = new char[len];
+//
+//		strcpy_s(pText,len,txt.pText);
+//		return *this;
+//	}
+//
+//	CText& operator=(CText&& txt)
+//	{
+//		cout << "CText move assignment operator function called." << endl;
+//		delete[] pText;
+//		pText = txt.pText;
+//		txt.pText = nullptr;
+//		return *this;
+//	}
+//
+//	CText operator+(const CText& txt)const
+//	{
+//		cout << "CText add operator function called." << endl;
+//		size_t len(strlen(pText) + strlen(txt.pText) +1);
+//		CText aText;
+//		aText.pText = new char[len];
+//		strcpy_s(aText.pText,len,pText);
+//		strcat_s(aText.pText,len,txt.pText);
+//		return aText;
+//	}
+//};
+//class CMessage
+//{
+//private:
+//	CText text;
+//public:
+//	void ShowIt()
+//	{
+//		text.ShowIt();
+//	}
+//
+//	CMessage operator+(const CMessage& aMess) const
+//	{
+//		cout << "CMessage add operator function called." << endl;
+//		CMessage message;
+//		message.text = text + aMess.text;
+//		return message;
+//	}
+//
+//	CMessage& operator=(const CMessage& aMess)
+//	{
+//		cout << "CMessage assignment operator function call." << endl;
+//		if(this == &aMess)
+//			return *this;
+//
+//		text = aMess.text;
+//		return *this;
+//	}
+//	CMessage& operator=(CMessage&& aMess)
+//	{
+//		cout << "CMessage move assignment operator function called." << endl;
+//		text = move(aMess.text);
+//		return *this;
+//	}
+//
+//	CMessage(const char* str="Default message")
+//	{
+//		cout << "CMessage constructor called." << endl;
+//		text = CText(str);
+//	}
+//
+//	CMessage(const CMessage& aMess)
+//	{
+//		cout << "CMessage copy constructor called." << endl;
+//		text = aMess.text;
+//	}
+//
+//	CMessage(CMessage&& aMess)
+//	{
+//		cout << "CMessage move constructor called." << endl;
+//		text = move(aMess.text);
+//	}
+//};
+
+class CBox
 {
-private:
-	char* pText;
 public:
-	void ShowIt()const
+	CBox(int l=0,int w=0,int h=0):m_l(l),m_w(w),m_h(h)
 	{
-		cout << pText << endl;
+		cout << "CBox constructor" << endl;
 	}
-
-	CText(const char* pStr = "No text")
+	int Volume()const
 	{
-		cout << "CText constructor called." << endl;
-		size_t len(strlen(pStr)+1);
-		pText = new char[len];
-		strcpy_s(pText,len,pStr);
+		return m_h*m_l*m_w;
 	}
-
-	CText(const CText& txt)
-	{
-		cout << "CText copy constructor called." << endl;
-		size_t len(strlen(txt.pText)+1);
-		pText = new char[len];
-		strcpy_s(pText,len,txt.pText);
-	}
-
-	CText(CText&& txt)
-	{
-		cout <<"CText move constructor called." << endl;
-		pText = txt.pText;
-		txt.pText = nullptr;
-	}
-
-	~CText()
-	{
-		cout << "CText destructor called." << endl;
-		delete [] pText;
-	}
-
-	CText& operator=(const CText &txt)
-	{
-		cout << "CText assignment operator function called." << endl;
-		if(this == & txt)
-		{
-			return *this;
-		}
-
-		delete [] pText;
-		size_t len(strlen(txt.pText)+1);
-		pText = new char[len];
-
-		strcpy_s(pText,len,txt.pText);
-		return *this;
-	}
-
-	CText& operator=(CText&& txt)
-	{
-		cout << "CText move assignment operator function called." << endl;
-		delete[] pText;
-		pText = txt.pText;
-		txt.pText = nullptr;
-		return *this;
-	}
-
-	CText operator+(const CText& txt)const
-	{
-		cout << "CText add operator function called." << endl;
-		size_t len(strlen(pText) + strlen(txt.pText) +1);
-		CText aText;
-		aText.pText = new char[len];
-		strcpy_s(aText.pText,len,pText);
-		strcat_s(aText.pText,len,txt.pText);
-		return aText;
-	}
+	int o;
+private:
+	int m_l;
+	int m_w;
+	int m_h;
 };
-class CMessage
+
+class CCandyBox:CBox
 {
-private:
-	CText text;
 public:
-	void ShowIt()
+	CCandyBox(int l=0,int w=0,int h=0,const char* c="Candy"):CBox(l,w,h)
 	{
-		text.ShowIt();
+		m_contents = new char[strlen(c)+1];
+		strcpy_s(m_contents,strlen(c)+1,c);
 	}
-
-	CMessage operator+(const CMessage& aMess) const
+	void Show(void)
 	{
-		cout << "CMessage add operator function called." << endl;
-		CMessage message;
-		message.text = text + aMess.text;
-		return message;
+		cout <<m_contents <<  Volume() << endl;
 	}
-
-	CMessage& operator=(const CMessage& aMess)
+	~CCandyBox()
 	{
-		cout << "CMessage assignment operator function call." << endl;
-		if(this == &aMess)
-			return *this;
-
-		text = aMess.text;
-		return *this;
+		delete [] m_contents;
 	}
-	CMessage& operator=(CMessage&& aMess)
-	{
-		cout << "CMessage move assignment operator function called." << endl;
-		text = move(aMess.text);
-		return *this;
-	}
-
-	CMessage(const char* str="Default message")
-	{
-		cout << "CMessage constructor called." << endl;
-		text = CText(str);
-	}
-
-	CMessage(const CMessage& aMess)
-	{
-		cout << "CMessage copy constructor called." << endl;
-		text = aMess.text;
-	}
-
-	CMessage(CMessage&& aMess)
-	{
-		cout << "CMessage move constructor called." << endl;
-		text = move(aMess.text);
-	}
+private:
+	char *m_contents;
 };
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -353,7 +391,7 @@ cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
 	//cout << "Volume:" << box1.Volume() << endl;
 	//printArea(20,35,Area());
 
-	CMessage motto1("The devil takes care of his own.");
+	/*CMessage motto1("The devil takes care of his own.");
 	CMessage motto2("If you sup with the devil use a long spoon.\n");
 	
 
@@ -370,7 +408,10 @@ cout << typeid(OutX(1,2)).name() << OutX(1,2) << endl;*/
 	motto4.ShowIt();
 	cout << endl;
 	Area<int> aa;
-	cout << aa(20,30) << endl;
+	cout << aa(20,30) << endl;*/
+	CCandyBox box;
+	cout << box.Volume() << endl;
+	//box.Show();
 	return 0; 
 
 }
